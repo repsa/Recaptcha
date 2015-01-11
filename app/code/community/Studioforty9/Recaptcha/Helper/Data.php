@@ -7,7 +7,7 @@
  * @author    StudioForty9 <info@studioforty9.com>
  * @copyright 2014 StudioForty9 (http://www.studioforty9.com)
  * @license   https://github.com/studioforty9/recaptcha/blob/master/LICENCE BSD
- * @version   1.0.1
+ * @version   1.0.0
  * @link      https://github.com/studioforty9/recaptcha
  */
 
@@ -68,5 +68,25 @@ class Studioforty9_Recaptcha_Helper_Data extends Mage_Core_Helper_Abstract
     public function getTheme()
     {
         return Mage::getStoreConfig(self::MODULE_KEY_THEME);
+    }
+
+    public function isAjax()
+    {
+        if (Mage::app()->getRequest()->isXmlHttpRequest()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function ajaxSuccess($resp){
+        ob_end_clean();
+        ignore_user_abort(true);
+        ob_start();
+        echo $resp;
+        header("Content-Length: " . mb_strlen($resp));
+        header("Connection: close");
+        header('Content-Encoding: none');
+        ob_end_flush();
+        flush();
     }
 }

@@ -7,7 +7,7 @@
  * @author    StudioForty9 <info@studioforty9.com>
  * @copyright 2014 StudioForty9 (http://www.studioforty9.com)
  * @license   https://github.com/studioforty9/recaptcha/blob/master/LICENCE BSD
- * @version   1.0.1
+ * @version   1.0.0
  * @link      https://github.com/studioforty9/recaptcha
  */
 
@@ -45,6 +45,7 @@ class Studioforty9_Recaptcha_Test_Block_Autorender extends EcomDev_PHPUnit_Test_
         $helper->expects($this->any())
             ->method('getSiteKey')
             ->will($this->returnValue($siteKey));
+
 
         $helper->expects($this->any())
             ->method('getSecretKey')

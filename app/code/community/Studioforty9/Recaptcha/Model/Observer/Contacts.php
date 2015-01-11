@@ -7,7 +7,7 @@
  * @author    StudioForty9 <info@studioforty9.com>
  * @copyright 2014 StudioForty9 (http://www.studioforty9.com)
  * @license   https://github.com/studioforty9/recaptcha/blob/master/LICENCE BSD
- * @version   1.0.1
+ * @version   1.0.0
  * @link      https://github.com/studioforty9/recaptcha
  */
 
@@ -31,9 +31,11 @@ class Studioforty9_Recaptcha_Model_Observer_Contacts
      */
     public function onContactsPostPreDispatch(Varien_Event_Observer $observer)
     {
-        if (! Mage::helper('studioforty9_recaptcha')->isEnabled()) {
+        if (!Mage::helper('studioforty9_recaptcha')->isEnabled()) {
             return $observer;
         }
+
+        $helper = Mage::helper('studioforty9_recaptcha');
 
         /** @var Mage_Contacts_IndexController $controller */
         $controller = $observer->getEvent()->getControllerAction();
@@ -42,6 +44,13 @@ class Studioforty9_Recaptcha_Model_Observer_Contacts
         $request = Mage::helper('studioforty9_recaptcha/request');
         /** @var Studioforty9_Recaptcha_Helper_Response $response */
         $response = $request->verify();
+
+        if($helper->isAjax()){
+            if ($response->isFailure()){
+                exit("captcha_error");
+            }
+            $helper->ajaxSuccess("success");
+        }
 
         if ($response->isFailure()) {
             Mage::getSingleton('core/session')->addError(

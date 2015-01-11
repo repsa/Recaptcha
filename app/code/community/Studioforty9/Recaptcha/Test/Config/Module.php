@@ -7,7 +7,7 @@
  * @author    StudioForty9 <info@studioforty9.com>
  * @copyright 2014 StudioForty9 (http://www.studioforty9.com)
  * @license   https://github.com/studioforty9/recaptcha/blob/master/LICENCE BSD
- * @version   1.0.1
+ * @version   1.0.0
  * @link      https://github.com/studioforty9/recaptcha
  */
 
@@ -30,7 +30,7 @@ class Studioforty9_Recaptcha_Test_Config_Module extends EcomDev_PHPUnit_Test_Cas
 
     public function test_module_version_is_correct()
     {
-        $this->assertModuleVersion('1.0.1');
+        $this->assertModuleVersion('1.0.0');
     }
 
 
@@ -58,7 +58,7 @@ class Studioforty9_Recaptcha_Test_Config_Module extends EcomDev_PHPUnit_Test_Cas
     {
 
         $this->assertConfigNodeValue(
-            'adminhtml/acl/resources/admin/children/system/children/config/children/google/children/studioforty9_recaptcha/title',
+            'adminhtml/acl/resources/admin/children/system/children/config/children/studioforty9_recaptcha/title',
             'ReCaptcha Configuration Settings'
         );
     }
